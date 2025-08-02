@@ -31,7 +31,7 @@ app.add_middleware(
 
 @app.on_event("startup")
 async def startup_db_client():
-    app.mongodb_client = AsyncIOMotorClient(os.getenv("MONGODB_URL", "mongodb://localhost:27017"))
+    app.mongodb_client = AsyncIOMotorClient(os.getenv("MONGODB_URL", "mongodb+srv://grad_project_632:workout123456789@cluster0.wo9llcy.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"))
     app.mongodb = app.mongodb_client["pickup-app"]
 
 @app.on_event("shutdown")
