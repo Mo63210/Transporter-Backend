@@ -1,12 +1,18 @@
 import bcrypt
 
-def hash_password(password: str) -> str:
+def hash_password(password: str | bytes) -> str:
     """
-    Hash a password using bcrypt directly
+    Hash a password using bcrypt directly, handling str or bytes input.
     """
+    if isinstance(password, bytes):
+        password_bytes = password
+    else:
+        password_bytes = password.encode('utf-8')
+
     salt = bcrypt.gensalt()
-    hashed = bcrypt.hashpw(password.encode('utf-8'), salt)
+    hashed = bcrypt.hashpw(password_bytes, salt)
     return hashed.decode('utf-8')
+
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
     """
